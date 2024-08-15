@@ -262,7 +262,7 @@ class GurobiDirect(DirectSolver):
 
         if self._version_major >= 5:
             for suffix in self._suffixes:
-                if re.match(suffix, "dual"):
+                if re.match(suffix, "dual") and self._solver_model.NumQConstrs > 0:
                     self._solver_model.setParam(gurobipy.GRB.Param.QCPDual, 1)
 
         self._solver_model.optimize(self._callback)
